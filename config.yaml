@@ -1,0 +1,23 @@
+user: "MrsSmokey"
+password: "Emily25"
+
+# Creditentials
+
+oc: 3 
+
+# Which OC to commit (Gun Smuggle/ Bank Heist etc)
+
+oc_plan: 1
+
+# OC Plan Efficiency (According to Money)
+
+with_extension: "True"
+
+# Make it ==True== only if you have API Key
+
+api_key: "ad2e616d9c5fd2979f57498a40644f86"
+
+crime_check_box: 7
+   
+# Its standard value is 9. Value 9 will choose the LAST checkbox from crime list.
+# 2nd last checkbox is 8, 3rd last is 7, and so on....
