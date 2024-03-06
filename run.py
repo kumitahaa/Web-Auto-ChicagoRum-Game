@@ -105,11 +105,11 @@ def play_game(crime_check_box = 9, oc = 3, oc_plan = 1):
             if crime_time.text == "00:00":
                 crime_commit(crime_check_box)
             # -------------------------- Check for OC -----------------------------------
-            if organize_time.text == "00:00:00":
-                organize_crime(oc,oc_plan)
-            # -------------------------- Check for Travel -----------------------------------
-            if travel_time.text == "00:00:00":
-                travel_commit()
+            # if organize_time.text == "00:00:00":
+            #     organize_crime(oc,oc_plan)
+            # # -------------------------- Check for Travel -----------------------------------
+            # if travel_time.text == "00:00:00":
+            #     travel_commit()
         except:
             play_game(crime_check_box, oc, oc_plan)
 
