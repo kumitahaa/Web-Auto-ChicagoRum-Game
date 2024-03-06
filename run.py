@@ -24,11 +24,11 @@ def init():
 def add_extension(api_key):
     global driver
     options = Options()
-    options.add_extension('CaptchaAI-Captcha-Solver.crx')
+    options.add_extension('CAPTCHA-Solver-free-auto-hCAPTCHA-reCAPTCHA.crx')
     driver = webdriver.Chrome(options=options)
-    api_url = "chrome-extension://fnnmnnfpdnlkccecmiicejhimhkbolhk/options/options.html"
-    driver.get(api_url)
-    api(api_key)
+    # api_url = "chrome-extension://fnnmnnfpdnlkccecmiicejhimhkbolhk/options/options.html"
+    # driver.get(api_url)
+    # api(api_key)
     print("Extension Added...")
     print("="*50)
 
@@ -54,6 +54,7 @@ def api(api_key = "13cecaa0db7f9439a9fceef518b9c15d"):
 def start():
     # ------------------- Opening WebPage ----------------------------------
     url = "https://www.chicagorum.com/"
+    driver.maximize_window()
     driver.get(url)
     print("Opened webpage...")
     print("="*50)
@@ -240,35 +241,35 @@ def travel_commit():
         travel_tab = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerTravel")))
         time.sleep(4)
         travel_tab.click()
+        try:
+            rest_time = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerTravel")))   
+            if rest_time.text == "00:00:00":
+                try:
+                    city = driver.find_element(By.CLASS_NAME, f"cinematic{str(city_count)}")
+                    if city_count == 5:
+                        city_count = 1
+                    else:
+                        city_count = city_count + 1
+                    submit_btn = driver.find_element(By.ID, "submit")
+                    time.sleep(4)
+                    city.click()
+                    time.sleep(4)
+                    submit_btn.click()
+                    print("Travel Completed...")
+                    print("=" * 50)
+                except:
+                    print(f"Couldn't Find City to Travel..   :/   :(")
+                    print("=" * 50)
+                    captcha_check()
+        except:
+            print(f"Couldn't Find Travel Ticker Clock..   :/   :(")
+            print("=" * 50)
+            captcha_check()
     except:
         print(f"Couldn't Find Travel Tab..   :/   :(")
         print("=" * 50)
         captcha_check()
-    try:
-        rest_time = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerTravel")))   
-        if rest_time.text == "00:00:00":
-            try:
-                city = driver.find_element(By.CLASS_NAME, f"cinematic{str(city_count)}")
-                if city_count == 5:
-                    city_count = 1
-                else:
-                    city_count = city_count + 1
-                submit_btn = driver.find_element(By.ID, "submit")
-                time.sleep(4)
-                city.click()
-                time.sleep(4)
-                submit_btn.click()
-                print("Travel Completed...")
-                print("=" * 50)
-            except:
-                print(f"Couldn't Find City to Travel..   :/   :(")
-                print("=" * 50)
-                captcha_check()
-    except:
-        print(f"Couldn't Find Travel Ticker Clock..   :/   :(")
-        print("=" * 50)
-        captcha_check()
-
+    
 
 def gta_commit():
     global theft_city # City to steal car from
@@ -277,35 +278,36 @@ def gta_commit():
         gta_tab = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerGta")))
         time.sleep(4)
         gta_tab.click()
+        try:
+            rest_time = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerGta")))   
+            if rest_time.text == "00:00":
+                print(f"Clicking on: city{str(theft_city)}")
+                try:
+                    city = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, f"city{str(theft_city)}")))
+                    if theft_city == 3:
+                        theft_city = 1
+                    else:
+                        theft_city = theft_city + 1
+                    submit_btn = driver.find_element(By.ID, "gta_submit")
+                    time.sleep(4)
+                    city.click()
+                    time.sleep(4)
+                    submit_btn.click()
+                    print("Car Theft Committed...")
+                    print("=" * 50)
+                except:
+                    print(f"Can't Click GTA city..   :/   :(")
+                    print("=" * 50)
+                    captcha_check()
+        except:
+            print(f"Couldn't Find GTA Ticker Clock..   :/   :(")
+            print("=" * 50)
+            captcha_check()
     except:
         print(f"Couldn't Find GTA Tab..   :/   :(")
         print("=" * 50)
         captcha_check()
-    try:
-        rest_time = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerGta")))   
-        if rest_time.text == "00:00":
-            print(f"Clicking on: city{str(theft_city)}")
-            try:
-                city = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, f"city{str(theft_city)}")))
-                if theft_city == 3:
-                    theft_city = 1
-                else:
-                    theft_city = theft_city + 1
-                submit_btn = driver.find_element(By.ID, "gta_submit")
-                time.sleep(4)
-                city.click()
-                time.sleep(4)
-                submit_btn.click()
-                print("Car Theft Committed...")
-                print("=" * 50)
-            except:
-                print(f"Can't Click GTA city..   :/   :(")
-                print("=" * 50)
-                captcha_check()
-    except:
-        print(f"Couldn't Find GTA Ticker Clock..   :/   :(")
-        print("=" * 50)
-        captcha_check()
+    
 
 
 def crime_commit(crime_check_box = 9):
@@ -314,30 +316,31 @@ def crime_commit(crime_check_box = 9):
         crime_tab = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerCrimes")))
         time.sleep(4)
         crime_tab.click()
+        try:
+            rest_time = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerCrimes"))        )
+            if rest_time.text == "00:00":
+                try:
+                    check_box = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, f"textland{str(crime_check_box)}")))
+                    submit_btn = driver.find_element(By.ID, "crime_submit")
+                    time.sleep(4)
+                    check_box.click()
+                    time.sleep(4)
+                    submit_btn.click()
+                    print("Crime Committed...")
+                    print("=" * 50)
+                except:
+                    print(f"Can't Find Crime to Commit..   :/   :(")
+                    print("=" * 50)
+                    captcha_check()
+        except:
+            print(f"Can't Find Crime Ticker Clock..   :/   :(")
+            print("=" * 50)
+            captcha_check()
     except:
         print(f"Can't find Crime tab..   :/   :(")
         print("=" * 50)
         captcha_check()
-    try:
-        rest_time = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "tickerCrimes"))        )
-        if rest_time.text == "00:00":
-            try:
-                check_box = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, f"textland{str(crime_check_box)}")))
-                submit_btn = driver.find_element(By.ID, "crime_submit")
-                time.sleep(4)
-                check_box.click()
-                time.sleep(4)
-                submit_btn.click()
-                print("Crime Committed...")
-                print("=" * 50)
-            except:
-                print(f"Can't Find Crime to Commit..   :/   :(")
-                print("=" * 50)
-                captcha_check()
-    except:
-        print(f"Can't Find Crime Ticker Clock..   :/   :(")
-        print("=" * 50)
-        captcha_check()
+    
 
 
 def captcha_check():

@@ -11,7 +11,7 @@ oc_plan: 1
 
 # OC Plan Efficiency (According to Money)
 
-with_extension: "false"
+with_extension: "true"
 
 # Make it ==True== only if you have API Key
 
